@@ -1,21 +1,28 @@
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import Foo from '../src/Foo';
+// import sinon from 'sinon';
 
 describe("A suite", function() {
-  it("contains spec with an expectation", function() {
-    expect(shallow(<Foo />).contains(<div className="foo" />)).toBe(true);
+  it("1. When Shallow rendered, starts with a class of initial", () => {
+    expect(shallow(<Foo />).is('.initial')).toBe(true);
   });
 
-  it("contains spec with an expectation", function() {
-    expect(shallow(<Foo />).is('.foo')).toBe(true);
+  it("2. When mounted in DOM, starts with a class of initial", () => {
+    expect(mount(<Foo />).find('.initial').length).toBe(1);
   });
 
-  it("contains spec with an expectation", function() {
-    expect(mount(<Foo />).find('.foo').length).toBe(1);
+  it("3. When shallow rendered, simulating click cause onClick to have been called", () => {
+    var btnSpy = spyOn(Foo.prototype.__reactAutoBindMap, 'onClick');
+    var componentRef = shallow(<Foo />);
+    componentRef.find('button').simulate('click');
+    expect(btnSpy).toHaveBeenCalled();
   });
 
-  it("can run an expectation with render", function() {
-    expect(render(<Foo />).find('.foo').length).toBe(1);
+  it("4. When shallow rendered, simulating click should change class to testClass", () => {
+    var componentRef = shallow(<Foo />);
+    componentRef.find('button').simulate('click');
+    expect(componentRef.find(".testClass").length).toBe(1);
   });
+
 });

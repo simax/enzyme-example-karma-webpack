@@ -1,22 +1,21 @@
 import React, { PropTypes } from 'react';
 
-const propTypes = {};
-
-const defaultProps = {};
-
-class Foo extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
+var Foo = React.createClass({
+  getInitialState() {
+    return {
+      test: "initial"
+    };
+  },
+  onClick() {
+    this.setState({test: "testClass"});
+  },
   render() {
     return (
-      <div className="foo" />
+      <div className={this.state.test}>
+        <button onClick={this.onClick}></button>
+      </div>
     );
   }
-}
-
-Foo.propTypes = propTypes;
-Foo.defaultProps = defaultProps;
+});
 
 export default Foo;

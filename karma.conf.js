@@ -28,7 +28,7 @@ module.exports = function(config) {
           },
           {
             test: /\.json$/,
-            loader: 'json',
+            loader: 'json'
           },
         ]
       },
@@ -62,6 +62,6 @@ module.exports = function(config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['Chrome'],
-    singleRun: false,
+    singleRun: false
   })
 };
